@@ -8,15 +8,15 @@ class Number {
     */
     private var _value: Int = 0
 
+    private def isDigit(s: String): Boolean = s.matches("^[0-9]*$")
+
+    private def isValidDigitOrder(s: String): Boolean = s.length == 1 || s.charAt(0) != '0'
+
     // ex) isNaturalNumber("10") => true
     // ex) isNaturalNumber("010") => false
     // ex) isNaturalNumber("0") => true
     // ex) isNaturalNumber("1000a") => false
     // ex) isNaturalNumber("-1") => false
-    private def isDigit(s: String): Boolean = s.matches("^[0-9]*$")
-
-    private def isValidDigitOrder(s: String): Boolean = s.length == 1 || s.charAt(0) != '0'
-
     private def isNaturalNumber(s: String): Boolean = isDigit(s) && isValidDigitOrder(s)
 
     def isPrime: Boolean = ((2 until value/2) forall (value % _ != 0))
