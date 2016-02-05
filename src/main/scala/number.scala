@@ -29,11 +29,11 @@ class Number {
     def value_= (x: Int) = _value = x
 }
 
-val n = new Number
-n.value = "7919"
-println(n.value)
-println(n.isPrime)
-println(11/2)
-n.increment
-println(n.value)
-println(n.isPrime)
+// val n = new Number
+// n.value = "7919"
+// println(n.value)
+// println(n.isPrime)
+// println(11/2)
+// n.increment
+// println(n.value)
+// println(n.isPrime)
