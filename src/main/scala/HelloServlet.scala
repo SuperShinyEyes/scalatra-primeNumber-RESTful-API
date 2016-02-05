@@ -10,6 +10,13 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
     Message("Ca va", "World")
   }
 
+  get("/r/") {
+    val numbers:String = params("list")
+    val action:String = params("action")
+    contentType = formats("json")
+    Message(numbers, action)
+  }
+
   get("/korea") {
     contentType = formats("json")
     Message("Annyung", "World")
