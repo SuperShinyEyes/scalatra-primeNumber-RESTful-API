@@ -7,7 +7,7 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
 
   get("/") {
     contentType = formats("json")
-    Message("Ca va", "World")
+    Message("Hello", "World")
   }
 
   get("/r/") {
