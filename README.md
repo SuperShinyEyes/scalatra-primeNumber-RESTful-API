@@ -8,8 +8,8 @@
 
 ## Usage
 
-    # Start the web server and reload it on file change
-    ./sbt "~;container:start; container:reload /"
+# Start the web server and reload it on file change
+./sbt "~;container:start; container:reload /"
 
 Let's curl!
 
