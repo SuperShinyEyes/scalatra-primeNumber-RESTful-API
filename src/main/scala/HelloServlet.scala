@@ -10,6 +10,14 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
     Message("Hello", "World")
   }
 
+  get("/num/:num") {
+    val numbers:Seq[String] = multiParams("num")
+    println(numbers)
+    println(numbers.mkString slice(4, -1))
+    contentType = formats("json")
+    Message(numbers.mkString, "World")
+  }
+
   get("/r/") {
     val numbers:String = params("list")
     val action:String = params("action")
