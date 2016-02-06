@@ -23,7 +23,22 @@ class NumberList {
         stringWithOutParameter.split(",").foreach( createNumberObject )
     }
 
+    def getSummary: String = {
+        val numbers = ArrayBuffer.empty[Int]
+        buf.foreach(numbers += _.value)
+        numbers.mkString(",")
+    }
     // def stringNumberList_ = (str: String) = _stringNumberList =
+
+    def doAction(action:String): Unit = {
+        action match {
+            case "inc" => buf.foreach(_.increment)
+
+            case "removePrime" => buf.filterNot(_.isPrime)
+
+            case whoa => println(s"$action")
+        }
+    }
 
 }
 

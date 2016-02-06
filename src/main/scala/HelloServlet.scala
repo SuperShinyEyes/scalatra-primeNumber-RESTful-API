@@ -5,18 +5,26 @@ import org.scalatra.json._
 class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
+  def convertToList(str:String): Array[String] = {
+      str.split("=")(1).split(",")
+  }
+
   get("/") {
     contentType = formats("json")
     Message("Hello", "World")
   }
 
-  get("/num/:num") {
-    val numbers:Seq[String] = multiParams("num")
-    println(numbers)
-    println(numbers.mkString slice(4, -1))
-    contentType = formats("json")
-    Message(numbers.mkString, "World")
-  }
+    get("/num/:num&:action") {
+        // "num=1,2,3"
+        val numberString: String = multiParams("num").mkString
+        val nl = new NumberList
+        nl.convertToList(numberString)
+        val actionString: String = multiParams("action").mkString
+        val actions = convertToList(actionString)
+        actions.foreach(nl.doAction)
+        contentType = formats("json")
+        MessagePrime(nl.getSummary, actionString)
+    }
 
   get("/r/") {
     val numbers:String = params("list")
@@ -37,3 +45,5 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
 }
 
 private case class Message(greeting: String, to: String)
+
+private case class MessagePrime(numbers: String, action: String)

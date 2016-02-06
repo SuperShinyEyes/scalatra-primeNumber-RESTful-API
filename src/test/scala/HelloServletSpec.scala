@@ -9,5 +9,18 @@ class HelloServletSpec extends MutableScalatraSpec {
         body must equalTo("""{"greeting":"Hello","to":"World"}""")
       }
     }
+
+    "return a number json" in {
+      get("/num/num=1,2&action=inc,removePrime") {
+        body must equalTo("""{"numbers":"1,2","action":"action=inc,removePrime"}""")
+      }
+    }
+
+    "return a number json" in {
+      get("/num/num=1,2&action=inc,removePrime") {
+        body must equalTo("""{"numbers":"1,2","action":"action=inc,removePrime"}""")
+      }
+    }
+
   }
 }
