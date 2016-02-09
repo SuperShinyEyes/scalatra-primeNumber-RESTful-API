@@ -8,7 +8,7 @@ class InputProcessorSpec extends FlatSpec with GivenWhenThen {
     "Prime function" must "work" in {
         Given("1000 primes from https://primes.utm.edu/lists/small/1000.txt")
         /* Convert to Set because we are using primes twice */
-        val primes: Set[Int] = Source.fromFile("1000primesWithNewline.txt").getLines.toSet.map((x$1:String) => x$1.toInt)
+        val primes: Set[Int] = Source.fromFile("file/1000primesWithNewline.txt").getLines.toSet.map((x$1:String) => x$1.toInt)
         val nonPrimes: Set[Int] = Iterator.range(2, 7920).toSet -- primes
         val ip = new InputProcessor(List(), List())
 
