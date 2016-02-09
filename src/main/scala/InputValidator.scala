@@ -34,8 +34,7 @@ class InputValidator(private var _inputNumbers: List[String], private val _input
         try {
             inputIntegers = inputNumbers.map(_.toInt).toSet.toList.sorted
         } catch {
-            case ex: NumberFormatException => println("Invalid numbers!")
-            return false
+            case ex: NumberFormatException => return false
         }
         return true
     }
