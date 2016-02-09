@@ -14,7 +14,15 @@ class HelloServletSpec extends MutableScalatraSpec {
     "Get /numbers=1,2,3" should {
         "return 1,2,3" in {
             get("/numbers=1,2,3") {
-                body must equalTo("""{"numbers":"numbers=1,2,3"}""")
+                body must equalTo("""{"numbers":"1, 2, 3"}""")
+            }
+        }
+    }
+
+    "Get /numbers=" should {
+        "return 1,2,3" in {
+            get("/numbers=1,2,3") {
+                body must equalTo("""{"numbers":"1, 2, 3"}""")
             }
         }
     }

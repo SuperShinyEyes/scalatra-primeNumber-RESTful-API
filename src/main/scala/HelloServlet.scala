@@ -8,45 +8,52 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
 
     // ex). "numbers=1,2,3,4" => List("1","2","3","4")
     // ex). "commands=inc,removePrime" => List("inc", "removePrime")
-    def convertToList(str:String): List[String] = {
+    private def convertToList(str:String): List[String] = {
         /* split() returns Array */
-        str.split("=")(1).split(",").toList
+        str.split("=").last.split(",").toList
     }
+
+    private def processInput(numbers: List[String], commands: List[String]): Any = {
+        val v = new InputValidator(numbers, commands)
+        if (v.isValid) {
+            val p = new InputProcessor(v.inputIntegers, commands)
+            p.runCommands
+            MessageSuccess(p.inputIntegers.mkString(", "))
+        } else {
+            MessageFail(v.getErrorMessage)
+        }
+    }
+
+    private def isNumbersEmpty(str:String): Boolean = str.contains("numbers")
+
+    private def getNoInputMessageFail = MessageFail("No input numbers.")
+
+    private def isNumberParameterEmpty(s: String): Boolean = s == "numbers"
 
     get("/") {
         contentType = formats("json")
         Message("Hello", "World")
     }
+
     get("/:numbers") {
         contentType = formats("json")
-        MessageSuccess(params("numbers"))
+        var numbers: List[String] = convertToList(params("numbers"))
+        if (isNumberParameterEmpty(numbers.head)) { getNoInputMessageFail }
+        else { MessageSuccess(numbers.mkString(", ")) }
+
     }
 
     get("/:numbers&:commands") {
         contentType = formats("json")
-        var digits: List[String] =  List()
-        var commands: List[String] = List()
-        try {
-            digits = convertToList(params("numbers"))
-        } catch {
-            case ex: ArrayIndexOutOfBoundsException => MessageFail("Invalid numbers")
+        var numbers: List[String] = convertToList(params("numbers"))
+
+        if (isNumberParameterEmpty(numbers.head)) { getNoInputMessageFail }
+        else {
+            var commands: List[String] = convertToList(params("commands"))
+            processInput(numbers, commands)
         }
 
-        try {
-            commands = convertToList(params("commands"))
-        } catch {
-            case ex: ArrayIndexOutOfBoundsException => MessageFail("Invalid numbers")
-        }
-
-        val v = new InputValidator(digits, commands)
-        if (v.isValid) {
-            val p = new InputProcessor(v.inputIntegers, commands)
-            p.runCommands
-            // MessageSuccess(p.inputIntegers.mkString(", "))
-            MessageSuccess("hahaha")
-        } else {
-            MessageFail(v.getErrorMessage)
-        }
+        // MessageFail("%s %s haha".format(params("numbers"), params("commands")))
 
     }
 }
