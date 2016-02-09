@@ -102,7 +102,7 @@ class InputValidatorSpec extends FlatSpec with GivenWhenThen {
         println(iv2.getErrorMessage)
         And("has correct error msg:\n\t   Invalid digits: five, 4a\n\t   Invalid commands: removePrrrrime, incc\n")
         assertResult(true, "The number value is not right") {
-            iv2.getErrorMessage == "Invalid digits: five, 4a\nInvalid commands: removePrrrrime, incc\n"
+            iv2.getErrorMessage == "Invalid digits: five, 4a. Invalid commands: removePrrrrime, incc."
         }
     }
 }

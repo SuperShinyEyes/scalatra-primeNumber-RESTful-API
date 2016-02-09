@@ -27,7 +27,7 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
             p.runCommands
             MessageSuccess(p.inputIntegers.mkString(", "))
         } else {
-            MessagePrime({params("numbers")}, {params("commands")})
+            MessageFail(v.getErrorMessage)
         }
 
     }
@@ -55,3 +55,5 @@ private case class Message(greeting: String, to: String)
 private case class MessagePrime(numbers: String, commands: String)
 
 private case class MessageSuccess(numbers: String)
+
+private case class MessageFail(error: String)

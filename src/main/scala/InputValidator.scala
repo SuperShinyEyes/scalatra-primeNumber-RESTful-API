@@ -55,8 +55,8 @@ class InputValidator(private var _inputDigits: List[String], private val _inputC
 
     def getErrorMessage: String = {
         var msg = ""
-        if (! isValidDigits) { msg = "Invalid digits: %s\n".format(getInvalidDigit)}
-        if (! isValidCommands) { msg += "Invalid commands: %s\n".format(getInvalidCommands)}
+        if (! isValidDigits) { msg = "Invalid digits: %s. ".format(getInvalidDigit)}
+        if (! isValidCommands) { msg += "Invalid commands: %s.".format(getInvalidCommands)}
         return msg
     }
 }
