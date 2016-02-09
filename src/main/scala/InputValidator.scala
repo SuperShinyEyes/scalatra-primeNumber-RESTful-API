@@ -22,7 +22,7 @@ class InputValidator(private var _inputDigits: List[String], private val _inputC
 
     def isValidDigits: Boolean = {
         try {
-            inputIntegers = inputDigits.map(_.toInt)
+            inputIntegers = inputDigits.map(_.toInt).toSet.toList.sorted
         } catch {
             case ex: NumberFormatException => println("Invalid digits!")
             return false

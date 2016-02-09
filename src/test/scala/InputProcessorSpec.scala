@@ -5,7 +5,7 @@ class InputProcessorSpec extends FlatSpec with GivenWhenThen {
 
     "Primes" should "be removed" in {
         Given("1,2,3,4 as an input")
-        val ip1 = new InputProcessor(Seq("removePrime"), List(1,2,3,4))
+        val ip1 = new InputProcessor(List(1,2,3,4),List("removePrime"))
 
         When("removePrime is called")
         ip1.removePrimes
@@ -19,7 +19,7 @@ class InputProcessorSpec extends FlatSpec with GivenWhenThen {
 
     "Inc" should "increment all items by 1" in {
         Given("3,7,23,555")
-        val ip1 = new InputProcessor(Seq("removePrime"), List(3,7,23,555))
+        val ip1 = new InputProcessor(List(3,7,23,555),List("removePrime"))
 
         When("increment is called")
         ip1.increment
@@ -33,7 +33,7 @@ class InputProcessorSpec extends FlatSpec with GivenWhenThen {
 
     "Commands" can "be multiple" in {
         Given("inc, removePrime, inc, removePrime and List(3,6,23,5520,7041)")
-        val ip1 = new InputProcessor(Seq("inc, removePrime, inc, removePrime"), List(3,6,23,5520,7041))
+        val ip1 = new InputProcessor(List(3,6,23,5520,7041), List("inc, removePrime, inc, removePrime"))
 
         When("increment is called")
         ip1.increment

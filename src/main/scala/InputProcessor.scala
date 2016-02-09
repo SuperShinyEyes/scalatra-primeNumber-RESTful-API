@@ -1,6 +1,6 @@
 import scala.collection.mutable.Set
 
-class InputProcessor(private val _inputCommands: Seq[String], private var _inputIntegers: List[Int]) {
+class InputProcessor(private var _inputIntegers: List[Int], private val _inputCommands: List[String]) {
 
     /* Remove duplicates and sort in ascending order */
     def init = inputIntegers = inputIntegers.toSet.toList.sorted
