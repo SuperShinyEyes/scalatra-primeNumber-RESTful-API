@@ -32,5 +32,31 @@ class InputValidator(private var _inputDigits: List[String], private val _inputC
 
     def isValidCommands: Boolean = inputCommands.forall(allowedCommands.contains(_))
 
-    def isValid: Boolean = true
+    def isValid: Boolean = isValidDigits && isValidCommands
+
+    def getInvalidDigit: String = {
+        // .getClass
+        val invalids: Set[String] = Set()
+        for (digit <- inputDigits) {
+            try {
+                digit.toInt
+            } catch {
+                case ex: NumberFormatException => invalids += digit
+            }
+        }
+        return invalids.mkString(", ")
+    }
+
+    def getInvalidCommands: String = {
+        val uniqueCommands = inputCommands.toSet
+        val invalidCommands = uniqueCommands diff allowedCommands.toSet
+        return invalidCommands.mkString(", ")
+    }
+
+    def getErrorMessage: String = {
+        var msg = ""
+        if (! isValidDigits) { msg = "Invalid digits: %s\n".format(getInvalidDigit)}
+        if (! isValidCommands) { msg += "Invalid commands: %s\n".format(getInvalidCommands)}
+        return msg
+    }
 }
