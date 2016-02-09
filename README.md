@@ -1,27 +1,32 @@
-# SBT-Scalatra skeleton
+# RemovePrim&Increment RESTful API using SBT-Scalatra
 
-## Features
+## Author
+Seyoung Park<br>
+[seyoung.park@aalto.fi](seyoung.park@aalto.fi)
 
+## Requirements
 * Scala 2.10
 * Scalatra 2.2.0
 * SBT IDEA 1.3.0
-
-## Usage
+* ScalaTest 2.2.6
 
 # Start the web server and reload it on file change
+```bash
 ./sbt "~;container:start; container:reload /"
 
-Let's curl!
-
-    curl localhost:8080
+# Let's curl!
+curl localhost:8080
+```
 
 ## Generate the IDEA project files
-
-    ./sbt gen-idea
+```bash
+./sbt gen-idea
+```
 
 ## Tests
-
-    ./sbt test
+```bash
+./sbt test
+```
 
 ## Description
 Toteuta Scalalla REST-rajapinta, joka ottaa vastaan kaksi parametria. Ensimmäinen on lista numeroita ja toinen on lista operaatioita. Ensimmäisen listan numerot ovat kokonaislukuja väliltä 0-10000. Lista operaatioista voi sisältää 0, 1, tai 2 kpl seuraavista operaatioista: inc, removePrimes. Operaatio "inc" kasvattaa jokaista numerolistan alkiota yhdellä ja "removePrimes"-operaatio poistaa numerolistasta kaikki alkuluvut. Operaatiot suoritetaan annetussa järjestyksessä.

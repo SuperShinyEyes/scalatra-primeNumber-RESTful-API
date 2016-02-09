@@ -1,6 +1,7 @@
 import org.scalatra._
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json._
+import java.lang.ArrayIndexOutOfBoundsException
 
 class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
     protected implicit val jsonFormats: Formats = DefaultFormats
@@ -16,11 +17,26 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
         contentType = formats("json")
         Message("Hello", "World")
     }
+    get("/:numbers") {
+        contentType = formats("json")
+        MessageSuccess(params("numbers"))
+    }
 
     get("/:numbers&:commands") {
         contentType = formats("json")
-        val digits: List[String] = convertToList(params("numbers"))
-        val commands: List[String] = convertToList(params("commands"))
+        try {
+            val digits: List[String] = convertToList(params("numbers"))
+        } catch {
+            case ex: ArrayIndexOutOfBoundsException => MessageFail("Invalid numbers")
+            return true
+        }
+
+        try {
+            val commands: List[String] = convertToList(params("commands"))
+        } catch {
+            case ex: ArrayIndexOutOfBoundsException => MessageFail("Invalid numbers")
+            return true
+        }
 
         val v = new InputValidator(digits, commands)
         if (v.isValid) {
