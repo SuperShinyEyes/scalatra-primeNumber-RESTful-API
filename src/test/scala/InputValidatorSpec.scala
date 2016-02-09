@@ -10,15 +10,15 @@ class InputValidatorSpec extends FlatSpec with GivenWhenThen {
         val v = new InputValidator(List("1", "2a"), List())
         Then("confirm invalidity")
         assertResult(true, "The number value is not right") {
-            v.isValidDigits == false
+            v.isValidNumbers == false
         }
         And("it has 0 numbers")
         assertResult(true, "The number value is not right") {
             v.inputIntegers.length == 0
         }
-        And("it has 1 invalid digit: 2a")
+        And("it has 1 invalid number: 2a")
         assertResult(true, "The number value is not right") {
-            v.getInvalidDigit == "2a"
+            v.getInvalidNumber == "2a"
         }
     }
 
@@ -28,11 +28,11 @@ class InputValidatorSpec extends FlatSpec with GivenWhenThen {
         val v = new InputValidator(numbers.map(_.toString), List())
         Then("confirm validity")
         assertResult(true, "The number value is not right") {
-            v.isValidDigits == true
+            v.isValidNumbers == true
         }
         And("it has 99 items")
         assertResult(true, "The number value is not right") {
-            v.inputDigits.length == 99
+            v.inputNumbers.length == 99
         }
         And("it has 0 commands")
         assertResult(true, "The number value is not right") {
@@ -106,9 +106,9 @@ class InputValidatorSpec extends FlatSpec with GivenWhenThen {
             v.isValid == false
         }
         println(v.getErrorMessage)
-        And("has correct error msg:\n\t   Invalid digits: five, 4a\n\t   Invalid commands: removePrrrrime, incc\n")
+        And("has correct error msg:\n\t   Invalid numbers: five, 4a\n\t   Invalid commands: removePrrrrime, incc\n")
         assertResult(true, "The number value is not right") {
-            v.getErrorMessage == "Invalid digits: five, 4a. Invalid commands: removePrrrrime, incc."
+            v.getErrorMessage == "Invalid numbers: five, 4a. Invalid commands: removePrrrrime, incc."
         }
     }
 }
