@@ -3,8 +3,14 @@ import scala.collection.mutable.Set
 import java.lang.NumberFormatException
 
 class InputValidator(private var _inputDigits: List[String], private val _inputCommands: List[String]) {
-
-    def init = inputDigits = inputDigits.toSet.toList
+    /*
+      Inputs should be validated and sanitized.
+      There are only two valid commands: inc(increment), and removePrime
+      Digit validation and sanitization works as following:
+        "1" => 1
+        "1a" => fail
+        "01" => 1
+    */
 
     private var _inputIntegers: List[Int] = List()
 
@@ -16,11 +22,15 @@ class InputValidator(private var _inputDigits: List[String], private val _inputC
 
     def inputCommands = _inputCommands
 
-    def inputIntegers_= (i: List[Int]) = _inputIntegers = i
+    def inputIntegers_= (newList: List[Int]) = _inputIntegers = newList
 
     def inputIntegers = _inputIntegers
 
     def isValidDigits: Boolean = {
+        /*
+          Try to convert digits into integers as well as removing duplicates
+          When failed, stop and return false
+        */
         try {
             inputIntegers = inputDigits.map(_.toInt).toSet.toList.sorted
         } catch {

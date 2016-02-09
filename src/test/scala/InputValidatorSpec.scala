@@ -7,50 +7,50 @@ class InputValidatorSpec extends FlatSpec with GivenWhenThen {
 
     "Wrong numbers" must "fail" in {
         Given("1, 2a as an input")
-        val iv = new InputValidator(List("1", "2a"), List())
+        val v = new InputValidator(List("1", "2a"), List())
         Then("confirm invalidity")
         assertResult(true, "The number value is not right") {
-            iv.isValidDigits == false
+            v.isValidDigits == false
         }
         And("it has 0 numbers")
         assertResult(true, "The number value is not right") {
-            iv.inputIntegers.length == 0
+            v.inputIntegers.length == 0
         }
         And("it has 1 invalid digit: 2a")
         assertResult(true, "The number value is not right") {
-            iv.getInvalidDigit == "2a"
+            v.getInvalidDigit == "2a"
         }
     }
 
     "Correct numbers" must "succeed" in {
         val numbers = List.range(1,100)
         Given("%s as an input".format(numbers.mkString(",")))
-        val iv = new InputValidator(numbers.map(_.toString), List())
+        val v = new InputValidator(numbers.map(_.toString), List())
         Then("confirm validity")
         assertResult(true, "The number value is not right") {
-            iv.isValidDigits == true
+            v.isValidDigits == true
         }
         And("it has 99 items")
         assertResult(true, "The number value is not right") {
-            iv.inputDigits.length == 99
+            v.inputDigits.length == 99
         }
         And("it has 0 commands")
         assertResult(true, "The number value is not right") {
-            iv.inputCommands.length == 0
+            v.inputCommands.length == 0
         }
 
     }
 
     "Wrong commands" must "fail" in {
         Given("inc, removePrrrrime, incc")
-        val iv = new InputValidator(List(), List("inc", "removePrrrrime", "incc"))
+        val v = new InputValidator(List(), List("inc", "removePrrrrime", "incc"))
         Then("confirm invalidity")
         assertResult(true, "The number value is not right") {
-            iv.isValidCommands == false
+            v.isValidCommands == false
         }
         And("it has 2 invalid commands: removePrrrrime, incc")
         assertResult(true, "The number value is not right") {
-            iv.getInvalidCommands == "removePrrrrime, incc"
+            v.getInvalidCommands == "removePrrrrime, incc"
         }
     }
 
@@ -77,22 +77,22 @@ class InputValidatorSpec extends FlatSpec with GivenWhenThen {
         val numbers = List.range(1,10)
         val commands = List("inc", "removePrime", "inc")
         Given("numbers=(%s)  commands=(%s) as an input".format(numbers.mkString(","), commands.mkString(",")))
-        val iv = new InputValidator(numbers.map(_.toString), commands)
+        val v = new InputValidator(numbers.map(_.toString), commands)
         Then("confirm validity")
         assertResult(true, "The number value is not right") {
-            iv.isValid == true
+            v.isValid == true
         }
         And("it has %d commands".format(commands.length))
         assertResult(true, "The number value is not right") {
-            iv.inputCommands.length == commands.length
+            v.inputCommands.length == commands.length
         }
         And("it has %d numbers".format(numbers.length))
         assertResult(true, "The number value is not right") {
-            iv.inputIntegers.length == numbers.length
+            v.inputIntegers.length == numbers.length
         }
         And("its error message is empty")
         assertResult(true, "The number value is not right") {
-            iv.getErrorMessage.size == 0
+            v.getErrorMessage.size == 0
         }
     }
 
@@ -100,15 +100,15 @@ class InputValidatorSpec extends FlatSpec with GivenWhenThen {
         val numbers = List("1","2","3","4a","4a","five")
         val commands = List("inc", "removePrrrrime", "incc", "removePrrrrime")
         Given("numbers=(%s)  commands=(%s) as an input".format(numbers.mkString(","), commands.mkString(",")))
-        val iv = new InputValidator(numbers, commands)
+        val v = new InputValidator(numbers, commands)
         Then("confirm invalidity")
         assertResult(true, "The number value is not right") {
-            iv.isValid == false
+            v.isValid == false
         }
-        println(iv.getErrorMessage)
+        println(v.getErrorMessage)
         And("has correct error msg:\n\t   Invalid digits: five, 4a\n\t   Invalid commands: removePrrrrime, incc\n")
         assertResult(true, "The number value is not right") {
-            iv.getErrorMessage == "Invalid digits: five, 4a. Invalid commands: removePrrrrime, incc."
+            v.getErrorMessage == "Invalid digits: five, 4a. Invalid commands: removePrrrrime, incc."
         }
     }
 }
