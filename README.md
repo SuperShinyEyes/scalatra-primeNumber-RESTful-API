@@ -28,7 +28,7 @@ curl localhost:8080
 ./sbt test
 ```
 
-## Description
+## Assignment Description
 Toteuta Scalalla REST-rajapinta, joka ottaa vastaan kaksi parametria. Ensimmäinen on lista numeroita ja toinen on lista operaatioita. Ensimmäisen listan numerot ovat kokonaislukuja väliltä 0-10000. Lista operaatioista voi sisältää 0, 1, tai 2 kpl seuraavista operaatioista: inc, removePrimes. Operaatio "inc" kasvattaa jokaista numerolistan alkiota yhdellä ja "removePrimes"-operaatio poistaa numerolistasta kaikki alkuluvut. Operaatiot suoritetaan annetussa järjestyksessä.
 
 #### Esimerkkejä:

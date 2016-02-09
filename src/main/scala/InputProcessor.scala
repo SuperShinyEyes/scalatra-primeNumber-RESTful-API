@@ -23,6 +23,7 @@ class InputProcessor(private var _inputIntegers: List[Int], private val _inputCo
 
             case "removePrime" => removePrimes
 
+            /* In practice whoa will be never called since invalid commands fail before */
             case whoa => println(s"$cmd")
         }
     }
