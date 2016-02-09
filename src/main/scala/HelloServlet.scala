@@ -13,7 +13,8 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
         str.split("=").last.split(",").toList
     }
 
-    private def processInput(numbers: List[String], commands: List[String]): Any = {
+    private def getMessageAfterProcess(numbers: List[String],
+            commands: List[String]): Message = {
         val v = new InputValidator(numbers, commands)
         if (v.isValid) {
             val p = new InputProcessor(v.inputIntegers, commands)
@@ -24,42 +25,26 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
         }
     }
 
-    private def isNumbersEmpty(str:String): Boolean = str.contains("numbers")
+    private def getEmptyParameterMessageFail(p: String) = MessageFail(s"No $p")
 
-    private def getNoInputMessageFail = MessageFail("No input numbers.")
-
-    private def isNumberParameterEmpty(s: String): Boolean = s == "numbers"
-
-    get("/") {
-        contentType = formats("json")
-        Message("Hello", "World")
-    }
-
-    get("/:numbers") {
-        contentType = formats("json")
-        var numbers: List[String] = convertToList(params("numbers"))
-        if (isNumberParameterEmpty(numbers.head)) { getNoInputMessageFail }
-        else { MessageSuccess(numbers.mkString(", ")) }
-
-    }
+    private def isParameterEmpty(param: String, arg: String): Boolean = param == arg
 
     get("/:numbers&:commands") {
         contentType = formats("json")
         var numbers: List[String] = convertToList(params("numbers"))
+        var commands: List[String] = convertToList(params("commands"))
 
-        if (isNumberParameterEmpty(numbers.head)) { getNoInputMessageFail }
+        if (isParameterEmpty("numbers", numbers.head)) { getEmptyParameterMessageFail("numbers") }
+        else if (isParameterEmpty("commands", commands.head)) { getEmptyParameterMessageFail("commands") }
         else {
-            var commands: List[String] = convertToList(params("commands"))
-            processInput(numbers, commands)
+            getMessageAfterProcess(numbers, commands)
         }
-
-        // MessageFail("%s %s haha".format(params("numbers"), params("commands")))
-
     }
 }
 
-private case class Message(greeting: String, to: String)
 
-private case class MessageSuccess(numbers: String)
+abstract class Message
 
-private case class MessageFail(error: String)
+private case class MessageSuccess(numbers: String) extends Message
+
+private case class MessageFail(error: String) extends Message

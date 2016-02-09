@@ -3,30 +3,6 @@ import org.scalatra.test.specs2.MutableScalatraSpec
 class HelloServletSpec extends MutableScalatraSpec {
     addServlet(classOf[HelloServlet], "/*")
 
-    "GET / on HelloServlet" should {
-        "return a greeting" in {
-            get("/") {
-                body must equalTo("""{"greeting":"Hello","to":"World"}""")
-            }
-        }
-    }
-
-    "Get /numbers=1,2,3" should {
-        "return 1,2,3" in {
-            get("/numbers=1,2,3") {
-                body must equalTo("""{"numbers":"1, 2, 3"}""")
-            }
-        }
-    }
-
-    "Get /numbers=" should {
-        "return 1,2,3" in {
-            get("/numbers=1,2,3") {
-                body must equalTo("""{"numbers":"1, 2, 3"}""")
-            }
-        }
-    }
-
     "Get /numbers=1,2,3,7,19,2141,5077&commands=removePrime" should {
         "return {numbers:\"\"}" in {
             get("/numbers=1,2,3,7,19,2141,5077&commands=removePrime") {
@@ -55,4 +31,11 @@ class HelloServletSpec extends MutableScalatraSpec {
         }
     }
 
+    "Get /numbers=&commands=removePrime" should {
+        "return {error: No numbers}" in {
+            get("/numbers=&commands=removePrime") {
+                body must equalTo("""{"error":"No numbers"}""")
+            }
+        }
+    }
 }
