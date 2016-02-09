@@ -4,6 +4,25 @@ import scala.io.Source
 
 class InputProcessorSpec extends FlatSpec with GivenWhenThen {
 
+    /* Test isPrime function with 1000 primes from utm.edu */
+    "Prime function" must "work" in {
+        Given("1000 primes from https://primes.utm.edu/lists/small/1000.txt")
+        /* Convert to Set because we are using primes twice */
+        val primes: Set[Int] = Source.fromFile("1000primesWithNewline.txt").getLines.toSet.map((x$1:String) => x$1.toInt)
+        val nonPrimes: Set[Int] = Iterator.range(2, 7920).toSet -- primes
+        val ip = new InputProcessor(List(), List())
+
+        Then("All primes are confirmed as primes")
+        assertResult(true) {
+            primes.forall(ip.isPrime(_))
+        }
+
+        And("All non-primes(2~7919) are confirmed as non-primes")
+        assertResult(true) {
+            nonPrimes.forall(!ip.isPrime(_))
+        }
+    }
+
 
     "Primes" should "be removed" in {
         Given("1,2,3,4 as an input")
@@ -68,24 +87,6 @@ class InputProcessorSpec extends FlatSpec with GivenWhenThen {
         Then("=> %s".format(ip1.inputIntegers.mkString(",")))
         assertResult(true, "The number value is not right") {
             ip1.inputIntegers == List(25)
-        }
-    }
-
-    "Prime function" must "work" in {
-        Given("1000 primes from https://primes.utm.edu/lists/small/1000.txt")
-        val primeSource: Iterator[String] = Source.fromFile("1000primesWithNewline.txt").getLines
-        val integerDomain: Iterator[Int] = Iterator.range(2, 7920)
-        val ip = new InputProcessor(List(), List())
-
-        Then("All primes are confirmed as primes")
-        assertResult(true) {
-            primeSource.forall((x$1: String) => ip.isPrime(x$1.toInt))
-        }
-
-        And("All non-primes are confirmed as non-primes")
-        assertResult(true) {
-            for (i <- integerDomain)
-            primeSource.forall((x$1: String) => ip.isPrime(x$1.toInt))
         }
     }
 }
