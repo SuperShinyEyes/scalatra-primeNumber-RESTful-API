@@ -54,25 +54,6 @@ class InputValidatorSpec extends FlatSpec with GivenWhenThen {
         }
     }
 
-    // "Correct commands" must "succeed" in {
-    //     Given("inc, removePrime, inc as an input")
-    //     val commands = List("inc", "removePrime", "inc")
-    //     val iv1 = new InputValidator(List(), commands)
-    //     Then("confirm validity")
-    //     assertResult(true, "The number value is not right") {
-    //         iv1.isValidCommands == true
-    //     }
-    //     And("it has %d commands".format(commands.length))
-    //     assertResult(true, "The number value is not right") {
-    //         iv1.inputCommands.length == commands.length
-    //     }
-    //     And("it has %d numbers".format(0))
-    //     assertResult(true, "The number value is not right") {
-    //         iv1.inputIntegers.length == 0
-    //     }
-    //
-    // }
-
     "Correct numbers and commands" must "succeed" in {
         val numbers = List.range(1,10)
         val commands = List("inc", "removePrime", "inc")

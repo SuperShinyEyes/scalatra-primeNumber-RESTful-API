@@ -3,6 +3,7 @@ import org.scalatest._
 
 class InputProcessorSpec extends FlatSpec with GivenWhenThen {
 
+
     "Primes" should "be removed" in {
         Given("1,2,3,4 as an input")
         val ip1 = new InputProcessor(List(1,2,3,4),List("removePrime"))
@@ -16,6 +17,7 @@ class InputProcessorSpec extends FlatSpec with GivenWhenThen {
             ip1.inputIntegers == List(4)
         }
     }
+
 
     "Inc" should "increment all items by 1" in {
         Given("3,7,23,555")

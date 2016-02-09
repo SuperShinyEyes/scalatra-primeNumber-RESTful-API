@@ -21,6 +21,10 @@ class HelloServletSpec extends MutableScalatraSpec {
     testGet("/numbers=3,6,23,5520,7041&commands=inc,removePrime,inc,removePrime", "{\"numbers\":\"25\"}")
 
 
+    /* Test number sanitization */
+    testGet("/numbers=01,0002&commands=inc", """{"numbers":"2, 3"}""")
+    
+
     /* Test invalid inputs */
     testGet("/numbers=&commands=removePrime", """{"error":"No numbers"}""")
 
