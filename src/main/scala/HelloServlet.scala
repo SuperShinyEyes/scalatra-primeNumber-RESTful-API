@@ -24,25 +24,26 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
 
     get("/:numbers&:commands") {
         contentType = formats("json")
+        var digits: List[String] =  List()
+        var commands: List[String] = List()
         try {
-            val digits: List[String] = convertToList(params("numbers"))
+            digits = convertToList(params("numbers"))
         } catch {
             case ex: ArrayIndexOutOfBoundsException => MessageFail("Invalid numbers")
-            return true
         }
 
         try {
-            val commands: List[String] = convertToList(params("commands"))
+            commands = convertToList(params("commands"))
         } catch {
             case ex: ArrayIndexOutOfBoundsException => MessageFail("Invalid numbers")
-            return true
         }
 
         val v = new InputValidator(digits, commands)
         if (v.isValid) {
             val p = new InputProcessor(v.inputIntegers, commands)
             p.runCommands
-            MessageSuccess(p.inputIntegers.mkString(", "))
+            // MessageSuccess(p.inputIntegers.mkString(", "))
+            MessageSuccess("hahaha")
         } else {
             MessageFail(v.getErrorMessage)
         }
