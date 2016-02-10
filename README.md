@@ -22,12 +22,6 @@ curl localhost:8080/numbers=1,2,7\&commands=inc,removePrime,inc,removePrime
 localhost:8080/numbers=1,2,7&commands=inc,removePrime,inc,removePrime
 # Returns {"numbers":"9"}
 ```
-
-## Generate the IDEA project files
-```bash
-./sbt gen-idea
-```
-
 ## Tests
 ```bash
 ./sbt test
