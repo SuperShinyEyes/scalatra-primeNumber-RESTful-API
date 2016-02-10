@@ -10,7 +10,7 @@ class InputValidator(private var _inputNumbers: List[String], private val _input
 
     private var _inputIntegers: List[Int] = List()
 
-    val allowedCommands = Vector("inc", "removePrime")
+    val allowedCommands = Vector("inc", "dec", "removePrime")
 
     def inputNumbers_= (s: List[String]) = _inputNumbers = s
 

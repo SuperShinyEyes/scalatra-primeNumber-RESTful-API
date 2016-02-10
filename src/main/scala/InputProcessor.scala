@@ -19,9 +19,13 @@ class InputProcessor(private var _inputIntegers: List[Int], private val _inputCo
 
     def increment: Unit = inputIntegers = inputIntegers.map(_ + 1)
 
+    def decrement: Unit = inputIntegers = inputIntegers.map(_ - 1)
+
     def runCommand(cmd: String) = {
         cmd match {
             case "inc" => increment
+
+            case "dec" => decrement
 
             case "removePrime" => removePrimes
 
