@@ -7,9 +7,10 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
 
     // ex). "numbers=1,2,3,4" => List("1","2","3","4")
     // ex). "commands=inc,removePrime" => List("inc", "removePrime")
+    // ex). "commands=inc,removePrime,    dec" => List("inc", "removePrime", "dec")
     private def convertToList(str:String): List[String] = {
         /* split() returns Array */
-        str.split("=").last.split(",").toList
+        str.split("=").last.split(",").toList.map((x$1:String) => x$1.trim)
     }
 
     private def getMessageAfterProcess(numbers: List[String],
