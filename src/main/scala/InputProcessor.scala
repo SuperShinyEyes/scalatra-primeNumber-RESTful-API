@@ -2,16 +2,18 @@ import scala.collection.mutable.Set
 
 class InputProcessor(private var _inputIntegers: List[Int], private val _inputCommands: List[String]) {
 
-    // Remove duplicates and sort in ascending order
-    // def init = inputIntegers = inputIntegers.toSet.toList.sorted
-
     def inputCommands = _inputCommands
 
     def inputIntegers = _inputIntegers
 
     def inputIntegers_= (newList: List[Int]) = _inputIntegers = newList
 
-    def isPrime(n: Int): Boolean = ((2 until (n+2)/2) forall (n % _ != 0))
+    /*
+       https://en.wikipedia.org/wiki/Prime_number
+       A prime is a natural number greater than 1 that has no positive divisor
+       other than 1 and itself.
+    */
+    def isPrime(n: Int): Boolean = ((2 until (n+2)/2) forall (n % _ != 0)) && n > 1
 
     def removePrimes = inputIntegers = inputIntegers.filterNot(isPrime(_))
 

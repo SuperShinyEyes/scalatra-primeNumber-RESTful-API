@@ -9,7 +9,7 @@ class InputProcessorSpec extends FlatSpec with GivenWhenThen {
         Given("1000 primes from https://primes.utm.edu/lists/small/1000.txt")
         /* Convert to Set because we are using primes twice */
         val primes: Set[Int] = Source.fromFile("file/1000primesWithNewline.txt").getLines.toSet.map((x$1:String) => x$1.toInt)
-        val nonPrimes: Set[Int] = Iterator.range(2, 7920).toSet -- primes
+        val nonPrimes: Set[Int] = Iterator.range(-7919, 7920).toSet -- primes
         val ip = new InputProcessor(List(), List())
 
         Then("All primes are confirmed as primes")
@@ -25,16 +25,16 @@ class InputProcessorSpec extends FlatSpec with GivenWhenThen {
 
 
     "Primes" should "be removed" in {
-        Given("1,2,3,4 as an input")
-        val ip1 = new InputProcessor(List(1,2,3,4),List("removePrime"))
+        Given("-1,0,1,2,3,4 as an input")
+        val ip1 = new InputProcessor(List(-1,0,1,2,3,4),List("removePrime"))
 
         When("removePrime is called")
         ip1.removePrimes
 
-        Then("1,2,3 should be removed")
+        Then("2,3 should be removed")
         assertResult(true, "The number value is not right") {
             println(ip1.inputIntegers)
-            ip1.inputIntegers == List(4)
+            ip1.inputIntegers == List(-1,0,1,4)
         }
     }
 

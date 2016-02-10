@@ -10,6 +10,8 @@ class InputValidator(private var _inputNumbers: List[String], private val _input
         "1" => 1
         "1a" => fail
         "01" => 1
+        "1.1" => fail
+        "-3" => -3
     */
 
     private var _inputIntegers: List[Int] = List()
