@@ -6,12 +6,6 @@ class InputValidator(private var _inputNumbers: List[String], private val _input
     /*
       Inputs should be validated and sanitized.
       There are only two valid commands: inc(increment), and removePrime
-      Digit validation and sanitization works as following:
-        "1" => 1
-        "1a" => fail
-        "01" => 1
-        "1.1" => fail
-        "-3" => -3
     */
 
     private var _inputIntegers: List[Int] = List()
@@ -46,7 +40,15 @@ class InputValidator(private var _inputNumbers: List[String], private val _input
     def isValid: Boolean = isValidNumbers && isValidCommands
 
     def getInvalidNumber: String = {
-        // .getClass
+        /*
+           validNumbers = { x | for all x which is an Integer  }
+           ex).
+                "1" => 1
+                "1a" => fail
+                "01" => 1
+                "1.1" => fail
+                "-3" => -3
+        */
         val invalids: Set[String] = Set()
         for (number <- inputNumbers) {
             try {
