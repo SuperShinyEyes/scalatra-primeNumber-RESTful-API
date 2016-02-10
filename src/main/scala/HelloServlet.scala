@@ -25,7 +25,7 @@ class HelloServlet extends ScalatraServlet with JacksonJsonSupport {
         }
     }
 
-    private def getEmptyParameterMessageFail(p: String) = MessageFail(s"No $p")
+    private def getEmptyParameterMessageFail(param: String) = MessageFail(s"No $param")
 
     private def isParameterEmpty(param: String, arg: String): Boolean = param == arg
 
