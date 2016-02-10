@@ -1,5 +1,3 @@
-import scala.collection.mutable.Set
-
 class InputProcessor(private var _inputIntegers: List[Int], private val _inputCommands: List[String]) {
 
     def inputCommands = _inputCommands

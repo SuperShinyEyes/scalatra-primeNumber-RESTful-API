@@ -1,7 +1,5 @@
 import org.scalatest.FlatSpec
 import org.scalatest._
-import scala.language.postfixOps
-import scala.collection.mutable._
 
 class InputValidatorSpec extends FlatSpec with GivenWhenThen {
 
