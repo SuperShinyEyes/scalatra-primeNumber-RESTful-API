@@ -1,5 +1,7 @@
 # RemovePrim&Increment RESTful API using SBT-Scalatra
 
+![demo](/file/demo.gif)
+
 ## Author
 Seyoung Park<br>
 [seyoung.park@aalto.fi](seyoung.park@aalto.fi)
