@@ -156,3 +156,46 @@ def getErrorMessage: String = {
     msg
 }
 ```
+
+### 6. Systematic Development
+```
+commit 7309556883d26b7f60b4a1bc2088e8f3a084962e
+Author: Young Park <i.make.seyoung@gmail.com>
+Date:   Wed Feb 10 10:17:18 2016 +0200
+
+    Test negative/float inputs
+
+commit e3b1c91ce50516bcfbd1300f8e5356cdc831300a
+Author: Young Park <i.make.seyoung@gmail.com>
+Date:   Wed Feb 10 10:11:14 2016 +0200
+
+    Redefine primality
+
+    https://en.wikipedia.org/wiki/Prime_number
+           A prime is a natural number greater than 1 that has no positive divisor
+           other than 1 and itself.
+
+commit 5cf6f0c4daae95fbccd34adcdf69d94b6770b7c7
+Author: Young Park <i.make.seyoung@gmail.com>
+Date:   Wed Feb 10 01:34:22 2016 +0200
+
+    Relocate prime file to file/
+
+commit a2eba586647d9a3ad682e3e839f30c3754ff3851
+Author: Young Park <i.make.seyoung@gmail.com>
+Date:   Wed Feb 10 01:31:26 2016 +0200
+
+    Add isPrime tests
+
+commit 1fae741212f6ef60e8987015f917080a0dbcd4ea
+Author: Young Park <i.make.seyoung@gmail.com>
+Date:   Wed Feb 10 01:14:40 2016 +0200
+
+    Add primes file
+
+commit df62764aad653f56968ccd010de2529822258094
+Author: Young Park <i.make.seyoung@gmail.com>
+Date:   Wed Feb 10 00:12:19 2016 +0200
+
+    Update README
+```
