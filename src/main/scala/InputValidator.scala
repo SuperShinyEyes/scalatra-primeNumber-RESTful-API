@@ -39,7 +39,7 @@ class InputValidator(private var _inputNumbers: List[String], private val _input
 
     def isValid: Boolean = isValidNumbers && isValidCommands
 
-    def getInvalidNumber: String = {
+    def getDistinctInvalidNumberAsString: String = {
         /*
            validNumbers = { x | for all x which is an Integer  }
            ex).
@@ -57,19 +57,17 @@ class InputValidator(private var _inputNumbers: List[String], private val _input
                 case ex: NumberFormatException => invalids += number
             }
         }
-        return invalids.mkString(", ")
+        invalids.mkString(", ")
     }
 
-    def getInvalidCommands: String = {
-        val uniqueCommands = inputCommands.toSet
-        val invalidCommands = uniqueCommands diff allowedCommands.toSet
-        return invalidCommands.mkString(", ")
+    def getDistinctInvalidCommandsAsString: String = {
+        (inputCommands.distinct diff allowedCommands).mkString(", ")
     }
 
     def getErrorMessage: String = {
         var msg = ""
-        if (! isValidNumbers) { msg = "Invalid numbers: %s. ".format(getInvalidNumber)}
-        if (! isValidCommands) { msg += "Invalid commands: %s.".format(getInvalidCommands)}
-        return msg
+        if (! isValidNumbers) { msg = "Invalid numbers: %s. ".format(getDistinctInvalidNumberAsString)}
+        if (! isValidCommands) { msg += "Invalid commands: %s.".format(getDistinctInvalidCommandsAsString)}
+        msg
     }
 }

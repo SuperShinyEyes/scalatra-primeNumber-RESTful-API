@@ -18,7 +18,7 @@ class InputValidatorSpec extends FlatSpec with GivenWhenThen {
         }
         And("it has 1 invalid number: 2a")
         assertResult(true, "The number value is not right") {
-            v.getInvalidNumber == "2a"
+            v.getDistinctInvalidNumberAsString == "2a"
         }
     }
 
@@ -50,7 +50,7 @@ class InputValidatorSpec extends FlatSpec with GivenWhenThen {
         }
         And("it has 2 invalid commands: removePrrrrime, incc")
         assertResult(true, "The number value is not right") {
-            v.getInvalidCommands == "removePrrrrime, incc"
+            v.getDistinctInvalidCommandsAsString == "removePrrrrime, incc"
         }
     }
 
