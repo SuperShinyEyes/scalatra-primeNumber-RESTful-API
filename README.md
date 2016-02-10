@@ -38,6 +38,7 @@ Toteuta Scalalla REST-rajapinta, joka ottaa vastaan kaksi parametria. Ensimmäin
 
 #### Esimerkkejä:
 * (1, 2, 3), ("inc") -> (2, 3, 4)
+* (1, 2, 3), ("dec") -> (0, 1, 2)
 * (1, 2, 3), ("removePrimes") -> (1)
 * (1, 2, 3), ("inc", "removePrimes") -> (4)
 
@@ -129,7 +130,7 @@ def inputIntegers_= (newList: List[Int]) = _inputIntegers = newList
 ### 5. Readability
 ```scala
 // src/main/scala/InputValidator.scala
-def getInvalidNumber: String = {
+def getDistinctInvalidNumberAsString: String = {
     /*
        validNumbers = { x | for all x which is an Integer  }
        ex).
@@ -147,25 +148,17 @@ def getInvalidNumber: String = {
             case ex: NumberFormatException => invalids += number
         }
     }
-    return invalids.mkString(", ")
+    invalids.mkString(", ")
 }
 
-def getInvalidCommands: String = {
-    val uniqueCommands = inputCommands.toSet
-    val invalidCommands = uniqueCommands diff allowedCommands.toSet
-    return invalidCommands.mkString(", ")
+def getDistinctInvalidCommandsAsString: String = {
+    (inputCommands.distinct diff allowedCommands).mkString(", ")
 }
 
 def getErrorMessage: String = {
     var msg = ""
-    if (! isValidNumbers) { msg = "Invalid numbers: %s. ".format(getInvalidNumber)}
-    if (! isValidCommands) { msg += "Invalid commands: %s.".format(getInvalidCommands)}
-    return msg
+    if (! isValidNumbers) { msg = "Invalid numbers: %s. ".format(getDistinctInvalidNumberAsString)}
+    if (! isValidCommands) { msg += "Invalid commands: %s.".format(getDistinctInvalidCommandsAsString)}
+    msg
 }
-```
-
-
-### 6. Functional Scala???
-```scala
-
 ```
