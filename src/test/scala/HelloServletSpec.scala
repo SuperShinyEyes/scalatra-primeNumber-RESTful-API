@@ -14,6 +14,8 @@ class HelloServletSpec extends MutableScalatraSpec {
     }
 
     /* Test valid inputs */
+    testGet("/numbers=1,,,,,2&commands=inc,dec", """{"numbers":"1, 2"}""")
+
     testGet("/numbers=-7,-3,-2,0,1,2,3,7,19,2141,5077&commands=removePrime", """{"numbers":"-7, -3, -2, 0, 1"}""")
 
     testGet("numbers=1,1,1,3,4,5,6,99,300,3123&commands=inc,inc,inc,removePrime,removePrime,removePrime", "{\"numbers\":\"4, 6, 8, 9, 102, 303, 3126\"}")
