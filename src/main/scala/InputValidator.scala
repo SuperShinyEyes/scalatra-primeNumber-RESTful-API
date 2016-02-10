@@ -8,7 +8,11 @@ class InputValidator(private var _inputNumbers: List[String], private val _input
       There are only two valid commands: inc(increment), and removePrime
     */
 
-    private var _inputIntegers: List[Int] = List()
+    private def convertListStringsToDistinctListIntegers(ls: List[String]): List[Int] = {
+        ls.map(_.toInt).distinct
+    }
+
+    private var _inputIntegers: List[Int] = if (isValidNumbers) convertListStringsToDistinctListIntegers(inputNumbers) else List()
 
     val allowedCommands = Vector("inc", "dec", "removePrime")
 
@@ -22,17 +26,12 @@ class InputValidator(private var _inputNumbers: List[String], private val _input
 
     def inputIntegers = _inputIntegers
 
+    def isValidNumber(n: String): Boolean = {
+        try { n.toInt; true } catch { case ex: NumberFormatException => false }
+    }
+
     def isValidNumbers: Boolean = {
-        /*
-          Try to convert numbers into integers as well as removing duplicates
-          When failed, stop and return false
-        */
-        try {
-            inputIntegers = inputNumbers.map(_.toInt).toSet.toList.sorted
-        } catch {
-            case ex: NumberFormatException => return false
-        }
-        return true
+        inputNumbers forall isValidNumber
     }
 
     def isValidCommands: Boolean = inputCommands.forall(allowedCommands.contains(_))
